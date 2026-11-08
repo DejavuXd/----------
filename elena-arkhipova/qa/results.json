@@ -1,0 +1,51 @@
+{
+  "sizes": [
+    {
+      "viewport": 1920,
+      "content": 1920,
+      "height": 4457
+    },
+    {
+      "viewport": 1440,
+      "content": 1440,
+      "height": 4457
+    },
+    {
+      "viewport": 1200,
+      "content": 1200,
+      "height": 4401
+    },
+    {
+      "viewport": 1024,
+      "content": 1024,
+      "height": 4403
+    },
+    {
+      "viewport": 768,
+      "content": 768,
+      "height": 5052
+    },
+    {
+      "viewport": 480,
+      "content": 480,
+      "height": 6079
+    },
+    {
+      "viewport": 375,
+      "content": 375,
+      "height": 6317
+    },
+    {
+      "viewport": 320,
+      "content": 320,
+      "height": 6580
+    }
+  ],
+  "consoleErrors": [],
+  "navigation": "passed",
+  "validation": "passed",
+  "unconfiguredForm": "no request sent",
+  "reducedMotion": "passed",
+  "typography": "awaiting supplied font",
+  "actualDelivery": "not configured"
+}

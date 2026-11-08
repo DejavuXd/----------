@@ -1,0 +1,124 @@
+@media (min-width: 1101px) { .principle-grid { margin-left: 110rem; } }
+@media (max-width: 1100px) {
+  :root { --gutter: 40px; }
+  .hero { grid-template-columns: 40% 60%; }
+  .hero-copy { padding-top: 250px; }
+  .hero h1,.consultation h2 { font-size: 34px; }
+  .hero-facts { left: 20px; right: 20px; }
+  .hero-facts > div { padding-inline: 10px; }
+  .hero-facts p { font-size: 10px; }
+  .hero-facts h2 { font-size: 9px; }
+  .navigation { padding-inline: 0; gap: 20px; }
+  .principle-grid { max-width: calc(100% - 80px); }
+  .principle-card { padding: 24px; }
+  .statement { font-size: 25px; }
+  .desktop-break { display: none; }
+  .about-photo { width: 90%; }
+  .about-copy { padding-top: 0; }
+  .credentials { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .credentials > div:last-child { grid-column: 1/-1; border: 0; padding-left: 0; }
+  .urgent { position: static; margin-top: 16px; }
+  .footer { padding-inline: 34px; }
+}
+@media (max-width: 800px) {
+  :root { --gutter: 24px; }
+  .header { position: relative; top: 0; display: flex; align-items: center; justify-content: space-between; min-height: 80px; gap: 16px; }
+  .brand { padding: 0; }
+  .header-phone { margin-left: auto; }
+  .menu-toggle { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px; background: transparent; border: 1px solid var(--color-graphite); color: inherit; order: 3; }
+  .navigation { display: none; position: absolute; top: 80px; left: 0; right: 0; padding: 24px; background: var(--color-graphite); flex-direction: column; }
+  .navigation.is-open { display: flex; }
+  .navigation a { padding: 12px; font-size: 14px; }
+  .hero { padding-right: 0; min-height: auto; grid-template-columns: 1fr; }
+  .hero-copy { padding: 48px var(--gutter); }
+  .hero h1 { font-size: 44px; }
+  .hero-description { max-width: 390px; font-size: 14px; line-height: 1.35; }
+  .hero-visual { margin-inline: var(--gutter); min-height: 480px; }
+  .hero-facts { bottom: 20px; }
+  .hero-facts h2 { font-size: 10px; }
+  .hero-facts p { font-size: 12px; line-height: 1.35; }
+  .hero-facts br { display: none; }
+  .principles { padding-top: 64px; }
+  .section-intro { grid-template-columns: 1fr; gap: 24px; }
+  .statement { font-size: 28px; }
+  .principle-grid { width: auto; max-width: none; margin: 40px var(--gutter) -32px; grid-template-columns: 1fr 1fr; }
+  .principle-card:nth-child(n) { grid-column: auto; }
+  .principle-card { min-height: 320px; }
+  .principle-card p { font-size: 14px; line-height: 1.35; }
+  .photo-transition { height: 400px; }
+  .practice { padding-block: 48px; }
+  .practice-content { gap: 32px; grid-template-columns: 1fr 1.5fr; }
+  .practice-media img { width: 100%; margin-top: 64px; }
+  .practice-description { font-size: 14px; line-height: 1.35; }
+  .practice-list { margin-top: 32px; line-height: 1.35; }
+  .about { padding-top: 64px; padding-bottom: 80px; }
+  .about-body { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .about-photo { width: 100%; height: 360px; }
+  .biography { font-size: 14px; line-height: 1.35; }
+  .credentials { grid-template-columns: 1fr; }
+  .credentials > div { padding: 0; border: 0; }
+  .credentials dd { font-size: 12px; }
+  .consultation { grid-template-columns: 1fr; gap: 32px; padding-bottom: 64px; }
+  .consultation-copy > p:last-child { max-width: 450px; font-size: 14px; line-height: 1.35; }
+  .contact-form { width: 100%; margin: 0; }
+  .field input { font-size: 16px; min-height: 48px; }
+  .field label { font-size: 16px; top: 14px; }
+  .field input:focus + label, .field input:not(:placeholder-shown) + label { transform: translateY(-10px) scale(.65); }
+  .consent { font-size: 12px; gap: 10px; }
+  .consent input { width: 20px; height: 20px; }
+  .button { min-height: 44px; font-size: 14px; }
+  .footer { padding: 32px 18px; }
+  .footer-main { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .contact-details { grid-column: 1/-1; }
+  .footer-bottom { grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 48px; font-size: 10px; }
+  .footer-bottom > :last-child { text-align: left; }
+  .footer-navigation a { min-height: 32px; }
+  .slider-controls button { width: 44px; height: 44px; }
+}
+@media (max-width: 480px) {
+  :root { --gutter: 20px; }
+  .header { flex-wrap: wrap; gap: 8px; }
+  .header-phone { font-size: 9px; padding: 8px 0; }
+  .brand { font-size: 13px; }
+  .menu-toggle { font-size: 12px; }
+  .hero-copy { padding-top: 32px; }
+  .hero h1 { font-size: clamp(31px,8.5vw,40px); }
+  .hero-visual { min-height: 490px; }
+  .hero-photo { top: 0; height: 340px; object-position: 48% center; }
+  .hero-visual::after { display: none; }
+  .hero-visual { background: var(--color-graphite); }
+  .hero-facts { position: relative; inset: auto; margin-top: 340px; padding: 20px; grid-template-columns: 1fr; gap: 16px; }
+  .hero-facts > div { padding: 0; border: 0; }
+  .hero-facts h2 { margin-bottom: 4px; }
+  .section-intro > * { min-width: 0; }
+  .statement { font-size: 24px; letter-spacing: -.5px; overflow-wrap: anywhere; hyphens: auto; }
+  .statement br { display: none; }
+  .principle-grid { grid-template-columns: 1fr; }
+  .principle-card { min-height: 300px; padding: 28px; }
+  .photo-transition { height: 300px; }
+  .photo-transition img { object-position: 65% center; }
+  .practice-heading { gap: 16px; }
+  .practice-content { grid-template-columns: 1fr; }
+  .practice-media { display: flex; gap: 24px; justify-content: space-between; }
+  .practice-media img { width: 160px; height: 210px; margin-top: 0; }
+  .practice-description,.practice-list { max-width: none; }
+  .about-body { grid-template-columns: 1fr; }
+  .about-photo { height: 320px; }
+  .biography { max-width: none; }
+  .credentials { gap: 24px; }
+  .consultation h2 { font-size: 30px; letter-spacing: -.8px; }
+  .consultation h2 br { display: none; }
+  .contact-form { padding: 24px 20px; }
+  .footer-main { grid-template-columns: 1fr; }
+  .footer-navigation { gap: 6px; }
+  .contact-details h2 { font-size: 32px; }
+  .contact-details address > a,.contact-details address > p { font-size: 18px; overflow-wrap: anywhere; }
+  .footer-bottom { grid-template-columns: 1fr; }
+}
+
+.brand img { width: 95rem; height: auto; }
+.footer-brand img { width: 211rem; height: auto; }
+.eyebrow, .slide-number, .header-phone { font-family: var(--font-label); }
+.practice-content { touch-action: pan-y; }
+@media (max-width: 800px) { .practice-copy { min-height: 470px; } }
+@media (max-width: 480px) { .practice-copy { min-height: 520px; } .practice-list { padding-top: 24px; } }

@@ -1,0 +1,45 @@
+:root {
+  --motion-ease: cubic-bezier(.22, 1, .36, 1);
+  --motion-micro: 280ms;
+}
+.motion-line { display: inline-block; max-width: 100%; vertical-align: top; }
+.photo-transition { position: relative; overflow: hidden; }
+.photo-mask { position: absolute; inset-block: 0; width: 50%; background: var(--color-background); pointer-events: none; }
+.photo-mask--left { left: 0; }
+.photo-mask--right { right: 0; }
+.button, .button:hover, .header-phone, .slider-controls button {
+  transition: 
+  background-color var(--motion-micro) var(--motion-ease), 
+  border-color var(--motion-micro) var(--motion-ease),
+   color var(--motion-micro) var(--motion-ease);
+}
+.button > .icon-arrow { transition: transform var(--motion-micro) var(--motion-ease); }
+.button:hover > .icon-arrow, .button:focus-visible > .icon-arrow { transform: translateX(3px); }
+.field input { transition: border-color 300ms var(--motion-ease); }
+.field label { transition: transform 320ms var(--motion-ease), color 300ms var(--motion-ease); }
+/* Original crosshairs stay in place; their individual details respond. */
+.star, .star::before, .star::after { transition: transform 700ms var(--motion-ease), background-size 700ms var(--motion-ease), color 500ms var(--motion-ease); }
+@media (hover: hover) and (pointer: fine) {
+  /* Confidentiality: the centre closes, joining the protective arms. */
+  .card-light:hover .star-four::after { transform: scale(.28); }
+  /* Risk assessment: a diagonal settles onto the horizontal measuring axis. */
+  .card-olive:hover .star-six::before { transform: rotate(-45deg); }
+  /* Anticipation: shift the centre opening toward the forward pair of arms. */
+  .card-orange:hover .star-cross { background-size: 1rem 82%, 82% 1rem; }
+  .card-orange:hover .star-cross::after { transform: translate(5rem, -5rem); }
+  /* Strategy: reorient the diagonals independently around a stable centre. */
+  .card-dark:hover .star-eight::before { transform: rotate(90deg) scale(.72); }
+  .card-dark:hover .star-eight::after { transform: scale(1.35); }
+  .footer a { transition: text-decoration-color var(--motion-micro) var(--motion-ease); 
+    /* text-decoration: underline;  */
+    text-decoration-color: transparent; text-underline-offset: 4rem; }
+  .footer a:hover { text-decoration-color: currentColor; }
+}
+.contact-form[aria-busy='true'] .submit-button { cursor: progress; }
+@media (max-width: 480px) { blockquote .motion-line { display: contents; } }
+@media (prefers-reduced-motion: reduce) {
+  .button, .button:hover, .button > .icon-arrow, .header-phone, .slider-controls button, .field input, .field label, .star, .star::before, .star::after, .footer a { transition: none; }
+  .button:hover > .icon-arrow, .button:focus-visible > .icon-arrow,
+  .principle-card:hover .star::before, .principle-card:hover .star::after { transform: none; }
+  .card-orange:hover .star-cross { background-size: 1rem 100%, 100% 1rem; }
+}

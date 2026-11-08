@@ -1,0 +1,18 @@
+@font-face { font-family: "Inter Tight"; src: url('/fonts/InterTight-Regular.woff2') format('woff2'); font-style: normal; font-weight: 400; font-display: swap; }
+@font-face { font-family: "Neue Montreal"; src: url('/fonts/NeueMontreal-Regular.woff2') format('woff2'); font-style: normal; font-weight: 400; font-display: swap; }
+/* Fluid dimensions preserve the 1200 composition up to 1920 without transform scaling. */
+html { font-size: 1px; }
+@media (min-width: 1200px) { html { font-size: clamp(1px, .0833333333vw, 1.6px); } }
+:root {
+  --color-background: #f5efeb;
+  --color-graphite: #2d2d2d;
+  --color-accent: #ea8424;
+  --color-muted: #a39c91;
+  --color-olive: #66614e;
+  --color-card-light: #ecddd1;
+  --gutter: 64rem;
+  --radius: 8rem;
+  --gap: 16rem;
+  --font-brand: "Inter Tight", sans-serif;
+  --font-label: "Neue Montreal", "Inter Tight", sans-serif;
+}
