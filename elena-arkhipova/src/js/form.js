@@ -1,9 +1,12 @@
 export function validateContact(values) {
   const errors = {};
-  if (values.name.trim().length < 2) errors.name = 'Укажите фамилию и имя.';
+  if (!values.name.trim()) errors.name = 'обязательное поле';
+  else if (values.name.trim().length < 2) errors.name = 'проверьте имя';
   const digits = values.phone.replace(/\D/g, '');
-  if (digits.length < 10 || digits.length > 15 || !/^[+\d\s()\-]+$/.test(values.phone)) errors.phone = 'Укажите телефон с кодом города или страны.';
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) errors.email = 'Укажите корректный адрес электронной почты.';
+  if (!values.phone.trim()) errors.phone = 'обязательное поле';
+  else if (digits.length < 10 || digits.length > 15 || !/^[+\d\s()\-]+$/.test(values.phone)) errors.phone = 'проверьте номер';
+  if (!values.email.trim()) errors.email = 'обязательное поле';
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) errors.email = 'проверьте почту';
   if (!values.consent) errors.consent = 'Для отправки необходимо согласие на обработку данных.';
   return errors;
 }
