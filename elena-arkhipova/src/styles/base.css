@@ -1,4 +1,6 @@
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
+.js .practice-content ~ .practice-content { display: none; }
 html { scroll-behavior: smooth; scroll-padding-top: 24rem; }
 body { margin: 0; background: var(--color-background); color: var(--color-graphite); font-family: var(--font-brand); font-size: 10rem; line-height: 1.35; }
 h1,h2,h3,p,blockquote,dl,dd { margin: 0; }

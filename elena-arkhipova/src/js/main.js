@@ -9,8 +9,10 @@ import { setupForm } from './form.js';
 import { setupSlider } from './slider.js';
 import { setupMotion } from './motion.js';
 import { setupPreloader } from './preloader.js';
+import { setupAnalytics } from './analytics.js';
 
 setupPreloader();
+setupAnalytics();
 setupNavigation();
 setupForm();
 setupSlider();

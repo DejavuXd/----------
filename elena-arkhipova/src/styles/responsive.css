@@ -129,3 +129,8 @@
 .footer-brand img { width: 211rem; height: auto; }
 .eyebrow, .slide-number, .header-phone { font-family: var(--font-label); }
 .practice-content { touch-action: pan-y; }
+@media (max-width: 800px) {
+  html:not(.js) .header { flex-wrap: wrap; }
+  html:not(.js) .menu-toggle { display: none; }
+  html:not(.js) .navigation { display: flex; position: static; width: 100%; }
+}

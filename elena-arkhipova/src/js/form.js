@@ -15,6 +15,7 @@ export function setupForm() {
   const form = document.querySelector('.contact-form');
   const status = document.querySelector('#form-status');
   const button = form.querySelector('[type="submit"]');
+  button.disabled = false;
   const endpoint = import.meta.env.VITE_CONTACT_ENDPOINT?.trim();
   const legalReady = import.meta.env.VITE_CONTACT_LEGAL_READY === 'true';
   const fields = ['name', 'phone', 'email', 'consent'];
@@ -48,8 +49,10 @@ export function setupForm() {
       return;
     }
     if (!endpoint || !legalReady) { setStatus(unavailable, 'error'); return; }
-    const url = new URL(endpoint, window.location.origin);
-    if (url.origin !== window.location.origin) {
+    let url;
+    try { url = new URL(endpoint, window.location.origin); }
+    catch { setStatus(unavailable, 'error'); return; }
+    if (url.origin !== window.location.origin || (url.protocol !== 'https:' && !['localhost', '127.0.0.1'].includes(url.hostname))) {
       setStatus(unavailable, 'error');
       return;
     }
@@ -67,6 +70,7 @@ export function setupForm() {
       const result = await response.json();
       if (!response.ok || result.ok !== true) throw new Error('Request not accepted');
       form.reset();
+      document.dispatchEvent(new Event('elena:form-success'));
       setStatus('Ваш запрос отправлен. Я свяжусь с вами.', 'success');
     } catch {
       setStatus('Не удалось подтвердить отправку. Позвоните: +7 (910) 787-73-42.', 'error');
