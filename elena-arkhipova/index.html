@@ -9,8 +9,24 @@
   <link rel="preload" href="/fonts/InterTight-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
   <script type="module" src="/src/js/main.js"></script>
+  <link rel="stylesheet" href="/src/styles/preloader.css">
 </head>
 <body>
+  <script>
+    (() => {
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const overlay = document.createElement('div');
+      overlay.className = 'golden-intro';
+      overlay.setAttribute('aria-hidden', 'true');
+      overlay.innerHTML = '<div class="golden-panel golden-top"></div><div class="golden-panel golden-bottom"></div><div class="golden-name"><span class="golden-micro">ЮРИДИЧЕСКАЯ ПРАКТИКА</span><span class="golden-title">Елена Архипова</span></div><div class="golden-line"></div><div class="golden-caption">АДВОКАТ</div>';
+      document.body.append(overlay);
+      const finish = () => { overlay.remove(); document.querySelector('.site')?.removeAttribute('inert'); };
+      window.goldenIntro = { overlay, finish, watchdog: setTimeout(finish, 2500) };
+      addEventListener('pagehide', finish, { once: true });
+      addEventListener('pageshow', event => { if (event.persisted) finish(); });
+      document.addEventListener('focusin', finish, { once: true });
+    })();
+  </script>
   <a class="skip-link" href="#main">Перейти к содержанию</a>
   <div class="site">
     <header class="header">

@@ -65,7 +65,7 @@ function revealLines(element, delay = 0) {
   });
 }
 
-export function setupMotion() {
+export function setupMotion({ skipHero = false } = {}) {
   if (initialized || !('IntersectionObserver' in window) || reducedMotion.matches) return;
   initialized = true;
   const heroTitle = document.querySelector('.hero h1');
@@ -96,7 +96,7 @@ export function setupMotion() {
     observer.observe(element);
   };
   // Start only when the hero is on screen (including restored scroll positions).
-  watch(document.querySelector('.hero'), () => {
+  if (!skipHero) watch(document.querySelector('.hero'), () => {
     animate(document.querySelector('.hero .eyebrow'), [{ opacity: .35 }, { opacity: 1 }], { duration: 450 });
     reveal(heroTitle, 80, { duration: 900 });
     revealImage(document.querySelector('.hero-photo'), 'vertical', 180, { duration: 1100 });

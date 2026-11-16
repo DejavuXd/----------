@@ -8,8 +8,10 @@ import { setupNavigation } from './navigation.js';
 import { setupForm } from './form.js';
 import { setupSlider } from './slider.js';
 import { setupMotion } from './motion.js';
+import { setupPreloader } from './preloader.js';
 
+setupPreloader();
 setupNavigation();
 setupForm();
 setupSlider();
-setupMotion();
+setupMotion({ skipHero: true });
