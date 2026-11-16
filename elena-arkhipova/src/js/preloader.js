@@ -25,6 +25,7 @@ export function setupPreloader() {
   if (reduced.matches || !state.overlay.animate) { state.finish(); return; }
   document.querySelector('.site')?.setAttribute('inert', '');
   const animations = [];
+  let resizeObserver;
   const t = INTRO_TIMING;
   const run = (element, duration, draw) => {
     if (!element) return;
@@ -33,6 +34,7 @@ export function setupPreloader() {
     return animation;
   };
   const finish = () => {
+    resizeObserver?.disconnect();
     animations.forEach(animation => animation.cancel());
     clearTimeout(state.watchdog);
     state.finish();
@@ -50,16 +52,29 @@ export function setupPreloader() {
       return { opacity: enter * (1 - range(time, t.expand, t.nameOut)), transform: `translateY(${(1 - enter) * 8}px)`, filter: `blur(${(1 - enter) * 3}px)` };
     });
     run(q('.golden-caption'), t.remove, time => ({ opacity: out(range(time, t.caption, t.captionEnd)) * (1 - range(time, t.expand, t.captionOut)) }));
-    const width = state.overlay.clientWidth;
-    const shortScale = Math.min(width * .4, 260) / width;
-    run(q('.golden-line'), t.remove, time => {
+    let width = state.overlay.clientWidth;
+    let height = state.overlay.clientHeight;
+    const drawLine = time => {
+      const shortScale = Math.min(width * .4, 260) / Math.max(1, width);
       const expand = inOut(range(time, t.expand, t.open));
       const initial = shortScale * out(range(time, t.line, t.lineEnd));
       return {
-        transform: `translateY(${9 * (1 - expand)}dvh) scaleX(${initial + (1 - initial) * expand})`,
+        transform: `translateY(${height * .09 * (1 - expand)}px) scaleX(${initial + (1 - initial) * expand})`,
         opacity: 1 - range(time, t.lineFade, t.lineOut),
       };
-    });
+    };
+    const line = run(q('.golden-line'), t.remove, drawLine);
+    if ('ResizeObserver' in window) {
+      resizeObserver = new ResizeObserver(() => {
+        const nextWidth = state.overlay.clientWidth;
+        const nextHeight = state.overlay.clientHeight;
+        if (!state.overlay.isConnected || (nextWidth === width && nextHeight === height)) return;
+        width = nextWidth;
+        height = nextHeight;
+        line.effect.setKeyframes(frames(t.remove, drawLine));
+      });
+      resizeObserver.observe(state.overlay);
+    }
     const top = run(q('.golden-top'), t.remove, time => ({ transform: `translateY(${-101 * inOut(range(time, t.open, t.end))}%)` }));
     run(q('.golden-bottom'), t.remove, time => ({ transform: `translateY(${101 * inOut(range(time, t.open, t.end))}%)` }));
     top.finished.then(() => state.finish()).catch(() => {});
