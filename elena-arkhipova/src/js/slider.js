@@ -1,6 +1,7 @@
 import { animate, reveal, motionStagger } from './motion.js';
 
 import { slides } from './practice-data.js';
+import { mobilePractice } from './mobile-practice.js';
 
 export function setupSlider() {
   const section = document.querySelector('#practice');
@@ -8,6 +9,14 @@ export function setupSlider() {
   section.querySelectorAll('.practice-content').forEach((slide, i) => { slide.hidden = i > 0; });
   const buttons = section.querySelectorAll('.slider-controls button');
   const image = panel.querySelector('img');
+  const mobile = matchMedia('(max-width: 599px)');
+  const heading = section.querySelector('.practice-heading');
+  const picture = document.createElement('picture');
+  picture.className = 'practice-picture';
+  const source = document.createElement('source');
+  source.media = '(max-width: 599px)';
+  image.before(picture);
+  picture.append(source, image);
   const announcement = document.createElement('p');
   announcement.className = 'sr-only';
   announcement.setAttribute('aria-live', 'polite');
@@ -18,7 +27,8 @@ export function setupSlider() {
   panel.tabIndex = 0;
   let index = 0;
   const paint = (target, slideIndex) => {
-    const slide = slides[slideIndex];
+    const slide = { ...slides[slideIndex], ...(mobile.matches ? mobilePractice[slideIndex] : {}) };
+    target.dataset.slide = String(slideIndex);
     target.querySelector('.slide-number').textContent = slide.label;
     target.querySelector('h3').textContent = slide.title;
     target.querySelector('.practice-description').textContent = slide.description;
@@ -29,6 +39,7 @@ export function setupSlider() {
     }));
     const targetImage = target.querySelector('img');
     targetImage.src = `${import.meta.env.BASE_URL}images/${slide.image}.webp`;
+    target.querySelector('source').srcset = `${import.meta.env.BASE_URL}mobile/${slide.image}.webp`;
     targetImage.alt = slide.alt;
     targetImage.width = 221;
     targetImage.height = 294;
@@ -42,7 +53,7 @@ export function setupSlider() {
   };
   const decoded = slides.map(slide => {
     const asset = new Image();
-    asset.src = `${import.meta.env.BASE_URL}images/${slide.image}.webp`;
+    asset.src = `${import.meta.env.BASE_URL}${mobile.matches ? 'mobile' : 'images'}/${slide.image}.webp`;
     return asset.decode().then(() => true, () => false);
   });
   let desired = 0;
@@ -103,11 +114,15 @@ export function setupSlider() {
   // Reserve the tallest slide at the current width so following sections stay still.
   const reserveHeight = () => {
     panel.style.minHeight = '';
+    // Preserve desktop geometry; reserve all variants on phones and tablets.
+    if (matchMedia('(min-width: 1101px)').matches) return;
     const measure = panel.cloneNode(true);
     measure.removeAttribute('id');
     measure.removeAttribute('tabindex');
     measure.setAttribute('aria-hidden', 'true');
     Object.assign(measure.style, {
+      // The no-flash sibling rule otherwise hides the measuring clone too.
+      display: 'grid',
       position: 'absolute',
       visibility: 'hidden',
       pointerEvents: 'none',
@@ -123,6 +138,14 @@ export function setupSlider() {
     measure.remove();
     panel.style.minHeight = `${Math.ceil(height)}px`;
   };
+  const updateLayout = () => {
+    if (mobile.matches) panel.prepend(heading);
+    else section.querySelector('.container').prepend(heading);
+    render(index, false);
+    reserveHeight();
+  };
+  mobile.addEventListener('change', updateLayout);
+  updateLayout();
   document.fonts.ready.then(reserveHeight);
   let width = 0;
   let frame;

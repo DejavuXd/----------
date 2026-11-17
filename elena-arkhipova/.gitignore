@@ -4,3 +4,5 @@ dist/
 .env.*
 !.env.example
 qa/screenshots/
+qa/figma-bridge/
+qa/mobile-check/
