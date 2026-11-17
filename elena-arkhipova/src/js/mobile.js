@@ -1,3 +1,5 @@
+import { setupAutoRail } from './auto-rail.js';
+
 export function setupMobileDetails() {
   const mobile = matchMedia('(max-width: 599px)');
   const portrait = document.querySelector('.about-photo');
@@ -8,7 +10,6 @@ export function setupMobileDetails() {
   source.srcset = `${import.meta.env.BASE_URL}mobile/about-photo.webp`;
   portrait.before(picture);
   picture.append(source, portrait);
-  const rails = [document.querySelector('.hero-facts'), document.querySelector('.credentials')];
   const updates = [
     ['#principles-title', 'Принципы работы адвоката'],
     ['.card-light p', 'Строгое соблюдение адвокатской тайны. Любая переданная вами информация и ваши интересы защищены на всех этапах работы'],
@@ -22,10 +23,9 @@ export function setupMobileDetails() {
   function update() {
     updates.forEach(({ node, text, original }) => { node.textContent = mobile.matches ? text : original; });
     paragraphs.forEach(({ node, html, original }) => { node.innerHTML = mobile.matches ? html : original; });
-    requestAnimationFrame(() => rails.forEach(rail => {
-      rail.scrollLeft = mobile.matches ? rail.children[1].offsetLeft - rail.offsetLeft - (rail.clientWidth - rail.children[1].offsetWidth) / 2 : 0;
-    }));
   }
   mobile.addEventListener('change', update);
   update();
+  setupAutoRail(document.querySelector('.hero-facts'), 'Факты о практике');
+  setupAutoRail(document.querySelector('.credentials'), 'Образование и опыт');
 }
