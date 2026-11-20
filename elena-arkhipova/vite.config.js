@@ -1,5 +1,10 @@
 import { defineConfig, loadEnv } from 'vite';
 import { slides } from './src/js/practice-data.js';
+import { fileURLToPath } from 'node:url';
+import { basename } from 'node:path';
+import { technicalPagesPlugin } from './src/technical-pages-plugin.js';
+import { checkPublic } from './security/scripts/check-public.mjs';
+import { resolve } from 'node:path';
 
 const esc = text => text.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 export default defineConfig(({ mode }) => {
@@ -11,9 +16,19 @@ export default defineConfig(({ mode }) => {
     site = url.href.replace(/\/?$/, '/');
   }
   const articles = slides.map((s, i) => `<article class="practice-content" data-practice="${i}"><div class="practice-media"><p class="slide-number">${esc(s.label)}</p><img src="/images/${s.image}.webp" width="221" height="294" alt="${esc(s.alt)}" loading="lazy" decoding="async"></div><div class="practice-copy"><h3>${esc(s.title)}</h3><p class="practice-description">${esc(s.description)}</p><ul class="practice-list">${s.items.map(item => `<li>${esc(item)}</li>`).join('')}</ul></div></article>`).join('\n');
-  return { plugins: [{
+  let resolvedConfig;
+  return { appType: 'mpa', server: { host: '127.0.0.1', fs: { deny: ['.env', '.env.*', '*.{crt,pem,key}', '**/.git/**', '**/security/**'] } }, build: { sourcemap: false, rollupOptions: { input: {
+    main: fileURLToPath(new URL('./index.html', import.meta.url)),
+    notFound: fileURLToPath(new URL('./404.html', import.meta.url)),
+    thanks: fileURLToPath(new URL('./thanks.html', import.meta.url)),
+    privacy: fileURLToPath(new URL('./privacy.html', import.meta.url)),
+    consent: fileURLToPath(new URL('./consent.html', import.meta.url)),
+  } } }, plugins: [{ name: 'public-build-boundary', apply: 'build', configResolved(config) { resolvedConfig = config; }, async closeBundle() {
+    await checkPublic(resolve(resolvedConfig.root, resolvedConfig.build.outDir));
+  } }, technicalPagesPlugin(), {
     name: 'static-seo',
-    transformIndexHtml: { order: 'pre', handler(html) {
+    transformIndexHtml: { order: 'pre', handler(html, context) {
+      if (basename(context.filename) !== 'index.html') return html;
       const person = { '@type': 'Person', name: 'Елена Александровна Архипова', jobTitle: 'Адвокат', telephone: '+79107877342', email: 'lenarxipova@mail.ru', identifier: '67/32' };
       const website = { '@type': 'WebSite', name: 'Елена Архипова — адвокат', inLanguage: 'ru-RU' };
       if (site) { person.url = site; website.url = site; }

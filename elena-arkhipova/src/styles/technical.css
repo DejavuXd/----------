@@ -1,0 +1,60 @@
+/* Figma Bridge 2401:409 / 2401:720: reference viewport 1200 × 588. */
+.technical-site { min-height: 100svh; display: flex; flex-direction: column; }
+.technical-header { position: relative; min-height: 44rem; margin-bottom: 12rem; flex-shrink: 0; }
+.technical-header .header-phone { background: var(--color-graphite); color: var(--color-background); }
+.technical-main { flex: 1; display: grid; min-height: calc(100svh - 56rem); padding: 64rem var(--gutter) 32rem; }
+.technical-main--404 { grid-template-columns: minmax(0,348fr) minmax(0,709fr); column-gap: 15rem; }
+.technical-main--thanks { grid-template-columns: minmax(0,528fr) minmax(0,435fr); column-gap: 109rem; }
+.technical-copy { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; gap: 48rem; min-width: 0; }
+.technical-intro { max-width: 100%; }
+.technical-page h1 { font: 400 40rem/1 'Inter Tight', sans-serif; letter-spacing: -.02em; }
+.technical-page h1,.technical-message p,.technical-emergency h2,.technical-emergency p,.technical-emergency-phone { text-box: trim-both cap alphabetic; }
+.technical-message { margin-top: 32rem; white-space: pre-line; font: 20rem/1.1 'Inter Tight', sans-serif; }
+.technical-back { flex-shrink: 0; min-height: 40rem; padding: 12rem; gap: 2rem; font: 10rem/1 var(--font-brand); border: 0; }
+.technical-back .icon-arrow { width: 16rem; height: 16rem; flex-basis: 16rem; }
+.technical-error-art { position: relative; width: 100%; aspect-ratio: 709/293; align-self: end; }
+.technical-error-code { position: absolute; left: 1.443%; top: -1.802%; width: 96.756%; max-width: none; height: auto; }
+.technical-emergency { align-self: end; min-width: 0; }
+.technical-emergency-copy { padding-bottom: 16rem; border-bottom: 1rem solid #5a5a5a; }
+.technical-emergency h2 { font: 28rem/1.1 'Inter Tight', sans-serif; letter-spacing: -.02em; }
+.technical-emergency-copy p { margin-top: 24rem; font: 11rem/1.4 var(--font-brand); }
+.technical-emergency-bottom { margin-top: 32rem; display: flex; justify-content: space-between; align-items: center; gap: 16rem; }
+.technical-emergency-phone { font: 28rem/1.1 'Inter Tight', sans-serif; letter-spacing: -.02em; white-space: nowrap; }
+.technical-socials { display: flex; gap: 8rem; }
+.technical-socials .footer-social { width: 24rem; height: 24rem; }
+.technical-socials img { width: 24rem; height: 24rem; max-width: none; }
+@media (min-width: 1101px) {
+  .technical-header .navigation { color: var(--color-graphite); }
+}
+@media (max-width: 1100px) {
+  .technical-header { margin-bottom: 0; }
+}
+@media (min-width: 600px) and (max-width: 1100px) {
+  .technical-header { min-height: 72px; }
+  .technical-main { padding-top: 48px; padding-bottom: 32px; min-height: calc(100svh - 72px); }
+  .technical-page h1 { font-size: clamp(28px, 3.34vw, 40px); }
+  .technical-main--thanks { column-gap: 40px; }
+  .technical-message { font-size: 18px; line-height: 1.2; }
+  .technical-emergency h2,.technical-emergency-phone { font-size: 24px; }
+  .technical-emergency-bottom { flex-wrap: wrap; }
+}
+@media (max-width: 800px) {
+  .technical-header { min-height: 72px; padding: 20px var(--gutter); }
+  .technical-main { padding: 48px var(--gutter) 24px; min-height: calc(100svh - 72px); grid-template-columns: minmax(0,1fr); grid-template-areas: 'intro' 'visual' 'action'; gap: 48px; }
+  .technical-main--404 { grid-template-rows: auto 1fr auto; }
+  .technical-copy { display: contents; }
+  .technical-intro { grid-area: intro; max-width: 560px; }
+  .technical-page h1 { font-size: 32px; line-height: 1.05; }
+  .technical-error-title br { display: none; }
+  .technical-error-art { grid-area: visual; align-self: center; justify-self: center; width: min(100%, 440px); }
+  .technical-back { grid-area: action; align-self: end; justify-self: start; min-height: 48px; padding: 0 12px 0 18px; gap: 8px; font-size: 13px; }
+  .technical-message { margin-top: 32px; gap: 24px; font-size: 18px; line-height: 1.25; }
+  .technical-emergency { grid-area: visual; width: 100%; max-width: 435px; }
+  .technical-emergency h2 { font-size: 24px; }
+  .technical-emergency-copy p { font-size: 14px; }
+  .technical-emergency-bottom { margin-top: 24px; flex-wrap: wrap; gap: 24px; }
+  .technical-emergency-phone { font-size: 24px; }
+  .technical-socials { gap: 12px; }
+  .technical-socials .footer-social { width: 32px; height: 32px; }
+  .technical-socials img { width: 32px; height: 32px; }
+}

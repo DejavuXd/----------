@@ -1,0 +1,13 @@
+{
+  "name": "elena/contact-handler",
+  "type": "project",
+  "require": {
+    "php": "^8.4",
+    "ext-openssl": "*",
+    "ext-mbstring": "*",
+    "ext-pdo": "*",
+    "ext-pdo_sqlite": "*",
+    "phpmailer/phpmailer": "^7.0"
+  },
+  "config": { "allow-plugins": {}, "sort-packages": true }
+}

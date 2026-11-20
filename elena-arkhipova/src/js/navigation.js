@@ -1,11 +1,11 @@
 import { createMenuMotion } from './menu-motion.js';
 import { reducedMotion } from './motion.js';
 
-export function setupNavigation() {
+export function setupNavigation({ contactsSource = document.querySelector('.contact-details') } = {}) {
   const toggle = document.querySelector('.menu-toggle');
   const navigation = document.querySelector('#navigation');
   const mobile = matchMedia('(max-width: 1100px)');
-  const contacts = document.querySelector('.contact-details').cloneNode(true);
+  const contacts = contactsSource.cloneNode(true);
   contacts.className = 'navigation-contact';
   contacts.querySelector('h2').remove();
   contacts.prepend(contacts.querySelector('.urgent'));
@@ -24,7 +24,7 @@ export function setupNavigation() {
   let closing;
   let scrollY = 0;
   let bodyStyle = '';
-  const inertTargets = [document.querySelector('main'), document.querySelector('footer'), document.querySelector('.brand'), document.querySelector('.header-phone'), document.querySelector('.skip-link')];
+  const inertTargets = [document.querySelector('main'), document.querySelector('footer'), document.querySelector('.brand'), document.querySelector('.header-phone'), document.querySelector('.skip-link')].filter(Boolean);
   const previousInert = new Map();
   function finishClose(returnFocus = false) {
     motion.cancel();

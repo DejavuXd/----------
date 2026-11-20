@@ -5,6 +5,8 @@ import '../styles/components.css';
 import '../styles/responsive.css';
 import '../styles/mobile.css';
 import '../styles/motion.css';
+import '../styles/cookies.css';
+import { setupCookies } from './cookies.js';
 import { setupNavigation } from './navigation.js';
 import { setupForm } from './form.js';
 import { setupSlider } from './slider.js';
@@ -14,6 +16,7 @@ import { setupAnalytics } from './analytics.js';
 import { setupMobileDetails } from './mobile.js';
 
 setupPreloader();
+setupCookies();
 setupAnalytics();
 setupNavigation();
 setupForm();

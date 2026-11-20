@@ -26,6 +26,7 @@
   .navigation-contact address p { width: max-content; max-width: calc(100vw - 20px); }
   .navigation-contact .footer-socials { position: static; display: flex; gap: 16px; margin: 0; }
   .navigation-contact .footer-social { width: 44px; height: 44px; }
+  .navigation .navigation-contact .footer-social { min-height: 44px; padding: 0; }
   html:not(.js) .menu-toggle { display: none; }
   html:not(.js) .header { flex-wrap: wrap; }
   html:not(.js) .navigation { display: block; position: static; height: auto; }
@@ -157,17 +158,16 @@
   .consultation-copy > p:last-child br + br { display: block; content: ''; margin-top: 24px; }
   .contact-form { width: 100%; margin: 0; padding: 24px; border-radius: 4px; }
   .field { margin-bottom: 16px; }
-  .field input { min-height: 40px; height: 40px; font-size: 16px; background: transparent; border-color: #a39c9144; color: var(--color-background); }
+  .field input { min-height: 40px; height: 40px; font-size: 16px; background: #2D2D2D; border-color: #5A5A5A80; color: var(--color-background); }
   .field label { font-size: 14px; top: 11px; }
-  .field input:not(:placeholder-shown),.field input:focus { color: var(--color-graphite); }
+  .field input:not(:placeholder-shown) { color: #2D2D2D; }
+  .field input:focus,.field input:focus-visible { color: #2D2D2D; }
   .field > .field-error { position: static; transform: none; white-space: normal; font-size: 10px; }
   .field > .field-error:not(:empty) { margin-top: 8px; }
   .field input[aria-invalid='true'] { padding-right: 16px; color: var(--color-background); }
   .consent { margin-top: 32px; align-items: center; gap: 8px; font: 10px/1.4 var(--font-brand); }
   .consent span { text-box: trim-both cap alphabetic; }
-  .consent input { width: 20px; height: 20px; }
-  .consent input { appearance: none; border: 1px solid var(--color-muted); border-radius: 2px; background: transparent; }
-  .consent input:checked { appearance: auto; }
+  .consent input { --checkbox-size: 20px; }
   .submit-button { margin-top: 32px; width: 100%; }
   .submit-button:enabled:not(:hover):not(:focus-visible) { background: #5a5a5a; color: var(--color-muted); }
   .footer { margin: 0; padding: 32px 20px; border-radius: 0; }
@@ -187,6 +187,8 @@
   .urgent { position: static; margin: 32px 0 0; font: 14px/1.4 var(--font-brand); }
   .urgent br { display: block; }
   .urgent::first-line { line-height: 1.4; }
-  .footer-bottom { display: flex; flex-direction: column; gap: 24px; margin-top: 64px; font: 14px/1.4 var(--font-brand); }
-  .footer-bottom > :last-child { display: block; width: 183.795px; height: 30.9px; font-size: 0; background: url('/mobile/credit.svg') left top/contain no-repeat; }
+  .footer-bottom { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; margin-top: 64px; font: 14px/1.4 var(--font-brand); }
+  .footer-credit { font-size: 14px; gap: 3px; }
+  .footer-credit-caption { font-size: 9px; }
+  .footer-credit-icon { width: 16px; height: 16px; }
 }
