@@ -1,4 +1,5 @@
 .contact-trap { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); pointer-events: none; }
+.hero-mobile-break { display: none; }
 .consent [data-legal],.consent a { text-transform: none; }
 .eyebrow { font-size: 10rem; font-weight: 400; text-transform: uppercase; line-height: 1.3; color: #A39C91; }
 .eyebrow::before { content: ''; display: inline-block; width: 6rem; height: 6rem; margin-right: 4rem; vertical-align: 1rem; background: var(--color-accent); }

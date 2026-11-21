@@ -80,6 +80,7 @@
   .hero-description { max-width: none; font: 14px/1.4 var(--font-brand); color: #5a5a5a; }
   .hero-description { min-height: 50px; }
   .hero-description br { display: none; }
+  .hero h1 .hero-mobile-break,.hero-description .hero-mobile-break { display: block; }
   .button { min-height: 48px; padding: 0 8px 0 18px; gap: 8px; font: 13px/1 var(--font-brand); border: 0; }
   .button .icon-arrow { width: 24px; height: 24px; flex-basis: 24px; }
   .button .arrow-glyph { width: 7px; height: 12px; }
@@ -129,6 +130,7 @@
   .practice-media,.practice-copy { display: contents; }
   .practice-media img { grid-area: image; width: calc(100% + 40px); max-width: none; height: auto; aspect-ratio: 360/299; margin: 0 -20px; object-fit: cover; border-radius: 0; }
   .slide-number { grid-area: label; max-width: none; margin-top: 24px; font: 16px/1.2 var(--font-label); }
+  .slide-number { white-space: pre-line; }
   .practice-copy h3 { grid-area: heading; margin-top: 48px; font: 18px/1.2 var(--font-label); }
   .practice-description { grid-area: description; margin-top: 24px; max-width: none; font: 14px/1.4 var(--font-brand); }
   .practice-description { white-space: pre-line; }
@@ -154,11 +156,11 @@
   .consultation h2 { margin: 0; font: 24px/1.1 var(--font-label); letter-spacing: -.02em; }
   .consultation h2 br { display: block; }
   .consultation-copy > p:last-child { margin: 0; max-width: none; font: 14px/1.4 var(--font-brand); color: #5a5a5a; }
-  .consultation-copy > p:last-child br { display: none; }
+  .consultation-copy > p:last-child br { display: block; }
   .consultation-copy > p:last-child br + br { display: block; content: ''; margin-top: 24px; }
   .contact-form { width: 100%; margin: 0; padding: 24px; border-radius: 4px; }
   .field { margin-bottom: 16px; }
-  .field input { min-height: 40px; height: 40px; font-size: 16px; background: #2D2D2D; border-color: #5A5A5A80; color: var(--color-background); }
+  .field input { min-height: 40px; height: 40px; font-size: 14px; background: #2D2D2D; border-color: #5A5A5A80; color: var(--color-background); }
   .field label { font-size: 14px; top: 11px; }
   .field input:not(:placeholder-shown) { color: #2D2D2D; }
   .field input:focus,.field input:focus-visible { color: #2D2D2D; }
