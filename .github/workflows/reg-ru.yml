@@ -1,0 +1,48 @@
+name: Опубликовать на REG.RU
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Обновить arxipova.ru? Введите arxipova.ru'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: reg-ru-production
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main' && inputs.confirm == 'arxipova.ru'
+    runs-on: ubuntu-latest
+    environment: reg-ru-production
+    defaults:
+      run:
+        working-directory: elena-arkhipova
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - name: Build and validate
+        env:
+          SITE_URL: https://arxipova.ru/
+          VITE_CONTACT_ENDPOINT: /api/contact.php
+          VITE_CONTACT_LEGAL_READY: 'true'
+        run: |
+          npm run build -- --configLoader runner --base=/
+          node qa/seo-check.mjs dist / https://arxipova.ru/
+          node security/scripts/prepare-apache.mjs dist
+      - name: Upload website with verified FTPS
+        env:
+          REG_RU_HOST: ${{ secrets.REG_RU_HOST }}
+          REG_RU_USER: ${{ secrets.REG_RU_USER }}
+          REG_RU_PASSWORD: ${{ secrets.REG_RU_PASSWORD }}
+        run: python3 security/scripts/publish-reg-ru.py
+      - name: Check HTTPS
+        run: curl --fail --silent --show-error --retry 3 https://arxipova.ru/ -o /dev/null
