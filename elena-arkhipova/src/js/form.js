@@ -1,10 +1,12 @@
+import { setupPhoneMask } from './phone-mask.js';
+
 export function validateContact(values) {
   const errors = {};
   if (!values.name.trim()) errors.name = 'обязательное поле';
   else if (values.name.trim().length < 2 || values.name.trim().length > 120 || !/^[\p{L}\p{M} .'’\-]+$/u.test(values.name.trim()) || !/\p{L}/u.test(values.name)) errors.name = 'проверьте имя';
   const digits = values.phone.replace(/\D/g, '');
   if (!values.phone.trim()) errors.phone = 'обязательное поле';
-  else if (values.phone.length > 30 || digits.length < 10 || digits.length > 15 || !/^\+?[\d ()\-]+$/.test(values.phone)) errors.phone = 'проверьте номер';
+  else if (!/^7[3489]\d{9}$/.test(digits) || !/^\+?[\d ()\-]+$/.test(values.phone)) errors.phone = 'проверьте номер РФ';
   if (!values.email.trim()) errors.email = 'обязательное поле';
   else if (values.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) errors.email = 'проверьте почту';
   if (!values.consent) errors.consent = 'Для отправки необходимо согласие на обработку данных.';
@@ -13,6 +15,7 @@ export function validateContact(values) {
 
 export function setupForm() {
   const form = document.querySelector('.contact-form');
+  setupPhoneMask(form.elements.phone);
   const status = document.querySelector('#form-status');
   const button = form.querySelector('[type="submit"]');
   button.disabled = false;
