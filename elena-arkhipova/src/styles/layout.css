@@ -91,6 +91,7 @@
 .contact-details small { color: var(--color-muted); font-size: 10rem; }
 .footer-socials { position: absolute; top: 89rem; right: 0; display: flex; gap: 8rem; }
 .contact-map { text-transform: none; }
+.contact-map .address-part { display: inline-block; white-space: nowrap; }
 .urgent { position: absolute; bottom: 0; right: 0; color: var(--color-accent); font-size: 10rem; }
 .footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 20rem; margin-top: 80rem; color: var(--color-muted); font-size: 10rem; }
 .footer-bottom > * { flex-shrink: 0; white-space: nowrap; }
